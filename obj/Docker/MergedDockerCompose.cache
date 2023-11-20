@@ -1,0 +1,46 @@
+name: dockercompose2117897190133077418
+services:
+  backend:
+    build:
+      context: C:\Users\aleck\source\repos\ShopAPI
+      dockerfile: ShopAPI/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    image: shopapi
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 80
+        published: "5000"
+        protocol: tcp
+  client:
+    build:
+      context: C:\Users\aleck\source\repos\ShopAPI\client
+      dockerfile: Dockerfile
+    image: client
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 3000
+        published: "5001"
+        protocol: tcp
+  proxy:
+    image: nginx:mainline
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 80
+        published: "80"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: C:\Users\aleck\source\repos\ShopAPI\nginx.conf
+        target: /etc/nginx/nginx.conf
+        bind:
+          create_host_path: true
+networks:
+  default:
+    name: dockercompose2117897190133077418_default

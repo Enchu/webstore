@@ -1,0 +1,25 @@
+# This is a generated file. Not intended for manual editing.
+version: "3.4"
+services:
+  backend:
+    build:
+      context: "C:\\Users\\aleck\\source\\repos\\ShopAPI"
+      dockerfile: "ShopAPI/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net7.0/ShopAPI.dll"
+    environment:
+      ASPNETCORE_STATICWEBASSETS: "/app/bin/Debug/net7.0/ShopAPI.staticwebassets.runtime.CT.json"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+      NUGET_PACKAGES: "C:\\Users\\aleck\\.nuget\\packages"
+      NUGET_FALLBACK_PACKAGES: "C:\\Users\\aleck\\.nuget\\packages"
+    image: "shopapi:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\aleck\\AppData\\Roaming\\Microsoft\\UserSecrets:/root/.microsoft/usersecrets"
+    - "C:\\Users\\aleck\\.nuget\\packages:/root/.nuget/fallbackpackages"
+    - "C:\\Users\\aleck\\source\\repos\\ShopAPI\\ShopAPI:/app:rw"
+    - "C:\\Users\\aleck\\source\\repos\\ShopAPI:/src:rw"
+    working_dir: "/app"

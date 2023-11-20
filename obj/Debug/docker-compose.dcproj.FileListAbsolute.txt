@@ -1,0 +1,1 @@
+C:\Users\aleck\source\repos\ShopAPI\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
