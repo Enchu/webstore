@@ -12,23 +12,40 @@
     position: relative;
     padding-bottom: 20px;
 
-    img{
-      width: 70%;
-      border-radius: 10px 10px 0 0;
-      transition: transform 0.5s ease;
+    h2{
+      font-weight: 600;
+      font-size: 24px;
+      text-align: center;
+      margin: 5px;
+    }
 
-      &:hover {
-        transform: scale(1.05);
+    p{
+      margin: 10px 20px;
+    }
+
+    img, b{
+      margin: 10px 20px;
+    }
+
+    b{
+      color: #5fa36a
+    }
+
+    .item-img{
+      display: flex;
+      justify-content: center;
+
+      img{
+        width: 250px;
+        height: auto;
+        border-radius: 10px 10px 0 0;
+        transition: transform 0.5s ease;
+
+        &:hover {
+          transform: scale(1.05);
+        }
       }
     }
-  }
-
-  h2, p, b{
-    margin: 10px 20px;
-  }
-
-  b{
-    color: #5fa36a
   }
 
   .add-to-cart{
@@ -57,3 +74,84 @@
     }
   }
 }
+
+.item-container{
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+
+  .item-l{
+    width: 50%;
+
+    .item-img{
+      width: 100%;
+
+      img{
+        width: 80%;
+        height: auto;
+        border-radius: 10px;
+      }
+    }
+  }
+
+  .item-r{
+    width: 50%;
+    padding: 0 20px;
+
+    .item-title {
+      text-align: center;
+      margin-top: 10px;
+
+      font-weight: 400;
+      font-size: 1.5rem;
+      line-height: 1.25;
+    }
+
+    .item-desc {
+      margin-top: 10px;
+      font-size: 24px;
+    }
+
+    .item-price {
+      flex: 1;
+      margin-top: 10px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .item-add{
+      display: flex;
+      justify-content: right;
+      margin-top: 20px;
+
+      button{
+        width: 100%;
+        max-width: 250px;
+        min-width: auto;
+
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+
+        border: 2px solid #000;
+        background-color: black;
+        padding: 10px;
+
+        &:hover{
+          background-color: var(--page-bg);
+        }
+      }
+
+      .item-btn__add{
+        cursor: pointer;
+        font-size: 24px;
+        height: 35px;
+        width: 35px;
+      }
+    }
+  }
+}
+

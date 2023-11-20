@@ -9,7 +9,7 @@ const Home = observer(() => {
     const {cart} = useContext(Context)
 
     const products = cart.carts.map((item) => {
-        return <Items key={item.id} items={item} />
+        return <Items key={item.id} items={item}/>
     })
 
     return (

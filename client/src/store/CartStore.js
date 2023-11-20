@@ -33,7 +33,38 @@ export default class CartStore {
                 count: 1,
                 price: 249.99,
                 totalprice: 249.99
-            }]
+            },
+            {
+                id: 4,
+                title: 'Стул серый',
+                img: any,
+                desc: 'Lorem ipsum dolor sit amet, consectetur aipisicing.',
+                category: 'chairs',
+                count: 1,
+                price: 49.99,
+                totalprice: 49.99
+            },
+            {
+                id: 5,
+                title: 'Стол',
+                img: any,
+                desc: 'Lorem ipsum dolor sit amet, consectetur aipisicing.',
+                category: 'tables',
+                count: 1,
+                price: 149.99,
+                totalprice: 149.99
+            },
+            {
+                id: 6,
+                title: 'Стол',
+                img: any,
+                desc: 'Lorem ipsum dolor sit amet, consectetur aipisicing.',
+                category: 'tables',
+                count: 1,
+                price: 149.99,
+                totalprice: 149.99
+            },
+            ]
         this._orders = []
         this._category = [
             {

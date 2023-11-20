@@ -8,17 +8,17 @@ const BasketCount: FC<any> = ({count, id}) => {
 
     return (
         <div className='count'>
+            <button type='button'>
+                <AiOutlineMinusCircle className='count__down'/>
+            </button>
+
             <div className='count__box'>
                 <input type='number' className='count__input' min='1' max='1' value={count} readOnly={true}/>
             </div>
-            <div className='count__controls'>
-                <button type='button' className='count__up'>
-                    <AiOutlinePlusCircle/>
-                </button>
-                <button type='button' className='count__down'>
-                    <AiOutlineMinusCircle />
-                </button>
-            </div>
+
+            <button type='button'>
+                <AiOutlinePlusCircle className='count__up'/>
+            </button>
         </div>
     );
 };

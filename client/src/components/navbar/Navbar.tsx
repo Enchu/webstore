@@ -25,10 +25,12 @@ const Navbar: FC = observer(() => {
     const [isHovered, setIsHovered] = useState(false);
 
     const handleMouseEnter = () => {
+        setCartOpen((prevCartOpen) => !prevCartOpen)
         setIsHovered(true);
     };
 
     const handleMouseLeave = () => {
+        setCartOpen((prevCartOpen) => !prevCartOpen)
         setIsHovered(false);
     };
 
@@ -59,21 +61,27 @@ const Navbar: FC = observer(() => {
                         </li>
 
                         <li className="nav-list__item">
-                            <span className='auth'
-                               onClick={() => setAuthOpen((prevCartOpen) => !prevCartOpen)}
-                                  >
+                            <span className='auth' onClick={() => setAuthOpen((prevCartOpen) => !prevCartOpen)}>
                                 Войти
                             </span>
                         </li>
                     </ul>
 
-                    <FaBasketShopping
-                        onClick={() => setCartOpen((prevCartOpen) => !prevCartOpen) }
-                        className={`shop-cart-button ${cartOpen && 'active'}`} />
+                    <NavLink to={'/basket'}>
+                        <FaBasketShopping
+                            onMouseEnter={handleMouseEnter}
+                            onMouseLeave={handleMouseLeave}
+                            className={`shop-cart-button ${isHovered && 'active'}`}
+                        />
+                    </NavLink>
 
-                    {cartOpen && (
-                        <div className='shop-cart'>
-                            {cart.orders.length > 0 ? <ShowOrders props={cart}/>: showNothing()}
+                    {isHovered && (
+                        <div className='shop-cart' onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                            {cartOpen && (
+                                <div className='shop-cart-content'>
+                                    {cart.orders.length > 0 ? <ShowOrders props={cart} /> : showNothing()}
+                                </div>
+                            )}
                         </div>
                     )}
 

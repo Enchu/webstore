@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Auth from "./pages/Auth";
 import Registration from "./pages/Registration";
 import Basket from "./components/basket/Basket";
+import ItemId from "./components/items/ItemId";
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
                   <Route path="/" element={<Home/>} />
                   <Route path="/auth" element={<Auth/>} />
                   <Route path="/registration" element={<Registration/>} />
+                  <Route path="/item">
+                      <Route path=":id" element={<ItemId />}/>
+                  </Route>
                   <Route path="/basket" element={<Basket/>} />
               </Routes>
               <Footer/>
