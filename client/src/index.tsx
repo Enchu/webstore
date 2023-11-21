@@ -1,4 +1,4 @@
-import React, {createContext} from 'react';
+import React, {createContext, StrictMode} from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import CartStore from "./store/CartStore";
@@ -14,7 +14,9 @@ root.render(
     <Context.Provider value={{
         cart: new CartStore()
     }}>
-        <App />
+        <StrictMode>
+            <App />
+        </StrictMode>
     </Context.Provider>,
 );
 

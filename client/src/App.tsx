@@ -9,6 +9,7 @@ import Auth from "./pages/Auth";
 import Registration from "./pages/Registration";
 import Basket from "./components/basket/Basket";
 import ItemId from "./components/items/ItemId";
+import Admin from "./pages/Admin";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
                       <Route path=":id" element={<ItemId />}/>
                   </Route>
                   <Route path="/basket" element={<Basket/>} />
+                  <Route path="/admin" element={<Admin/>} />
               </Routes>
               <Footer/>
               {/*<ExampleForm/>*/}

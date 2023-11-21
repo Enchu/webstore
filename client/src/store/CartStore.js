@@ -68,15 +68,23 @@ export default class CartStore {
         this._orders = []
         this._category = [
             {
-                cat: 'chairs',
+                id:'all',
+                name: 'все',
             },
             {
-                cat: 'tables',
+                id:'chairs',
+                name: 'стулья',
             },
             {
-                cat: 'sofa'
+                id:'tables',
+                name: 'столы',
+            },
+            {
+                id:'sofa',
+                name: 'диваны'
             }
         ]
+        this._currentCart = this._cart
         makeAutoObservable(this)
     }
 
@@ -92,6 +100,10 @@ export default class CartStore {
         this._category = category
     }
 
+    setCurrentCart(CurrentCart){
+        this._currentCart = CurrentCart
+    }
+
     get carts(){
         return this._cart
     }
@@ -102,6 +114,10 @@ export default class CartStore {
 
     get categories(){
         return this._category
+    }
+
+    get currentCart(){
+        return this._currentCart
     }
 
     addToOrder(item) {
@@ -134,5 +150,14 @@ export default class CartStore {
         if(!isInArray){
             this.setOrder({_orders: [...this.orders, this.orders.count++ ]})
         }
+    }
+
+    chooseCategory(category){
+        if(category.id === 'all'){
+            this._currentCart = this._cart;
+        } else{
+            this._currentCart = this._cart.filter(el => el.category === category.id);
+        }
+
     }
 }

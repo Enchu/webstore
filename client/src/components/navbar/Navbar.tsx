@@ -54,9 +54,10 @@ const Navbar: FC = observer(() => {
                                 Home
                             </NavLink>
                         </li>
+
                         <li className="nav-list__item">
-                            <NavLink to='/basket' className={({isActive}) => isActive ? activeLink : normalLink}>
-                                Basket
+                            <NavLink to='/admin' className={({isActive}) => isActive ? activeLink : normalLink}>
+                                Admin
                             </NavLink>
                         </li>
 
