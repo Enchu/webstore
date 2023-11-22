@@ -28,6 +28,7 @@ function App() {
                   <Route path="/basket" element={<Basket/>} />
                   <Route path="/admin" element={<Admin/>} />
               </Routes>
+
               <Footer/>
               {/*<ExampleForm/>*/}
           </div>

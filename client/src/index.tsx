@@ -2,8 +2,7 @@ import React, {createContext, StrictMode} from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import CartStore from "./store/CartStore";
-import data from "./utils/data";
-
+import UserStore from "./store/UserStore";
 export const Context = createContext<any>(null)
 
 const root = ReactDOM.createRoot(
@@ -12,7 +11,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
     <Context.Provider value={{
-        cart: new CartStore()
+        cart: new CartStore(),
+        user: new UserStore()
     }}>
         <StrictMode>
             <App />

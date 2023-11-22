@@ -3,9 +3,7 @@ import './style.scss'
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
 import {Context} from "../../index";
 
-const BasketCount: FC<any> = ({count, id}) => {
-    const {cart} = useContext(Context)
-
+const BasketCount: FC<any> = ({count}) => {
     return (
         <div className='count'>
             <button type='button'>

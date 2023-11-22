@@ -1,19 +1,53 @@
-import React, {FC, SyntheticEvent, useState} from 'react';
+import React, {FC, SyntheticEvent, useContext, useState} from 'react';
 import {LoginFormProps} from "../../Interface/Auth";
 import './style.scss'
 import { IoEye, IoEyeOff } from 'react-icons/io5';
+import {login} from "../../http/userApi";
+import {Context} from "../../index";
 
 const LoginForm:FC<LoginFormProps> = ({ onLogin, onRegisterClick }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
+    const {user} = useContext(Context)
+
     const toggleShowPassword = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
     };
 
-    const handleLogin = () => {
-        onLogin(email, password);
+    const handleLogin = async (e: any) => {
+        e.preventDefault()
+        //onLogin(email, password);
+
+        try {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}api/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password,
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+
+            console.log(data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+
+        // let users = await login(email, password)
+        // console.log(users)
+        //
+        // user.setUser(user)
+        // user.isAuth(true)
     };
 
     return (
@@ -48,7 +82,7 @@ const LoginForm:FC<LoginFormProps> = ({ onLogin, onRegisterClick }) => {
                         </span>
                 </div>
 
-                <button onClick={handleLogin} className="login-form-button button_button-cisl" type="submit">
+                <button onClick={(e) => handleLogin(e)} className="login-form-button button_button-cisl">
                     <span className={`login_button_label`}>Войти</span>
                 </button>
             </form>

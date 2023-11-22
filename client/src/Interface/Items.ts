@@ -7,7 +7,7 @@ export interface IItems {
     img: any;
     desc: string;
     category: string;
-    count: any
+    count: number;
     price: any;
 }
 

@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
 
-const ForgotPasswordForm:FC = () => {
+const ForgotPasswordForm: FC = () => {
     const [email, setEmail] = useState('');
 
     const handleLogin = () => {

@@ -1,9 +1,9 @@
 import React, {FC} from 'react';
-import {Form, Modal} from "react-bootstrap";
+import {Button, Form, Modal} from "react-bootstrap";
 
-const CreateCategory:FC<any> = () => {
+const CreateCategory:FC<any> = ({show, onHide}) => {
     return (
-        <Modal size="lg" centered>
+        <Modal show={show} onHide={onHide} centered>
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
                     Добавить Категорию
@@ -11,9 +11,13 @@ const CreateCategory:FC<any> = () => {
             </Modal.Header>
             <Modal.Body>
                 <Form>
-                    <Form.Control placeholder={"Введите"}/>
+                    <Form.Control placeholder={"Введите название"}/>
                 </Form>
             </Modal.Body>
+            <Modal.Footer>
+                <Button variant="outline-danger" onClick={onHide}>Закрыть</Button>
+                <Button variant="outline-success" onClick={onHide}>Закрыть</Button>
+            </Modal.Footer>
         </Modal>
     );
 };

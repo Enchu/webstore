@@ -2,7 +2,7 @@ import React, {FC, useContext} from 'react';
 import {Context} from "../../index";
 import './style.scss'
 
-const SlideBar: FC<any> = () => {
+const SlideBar: FC = () => {
     const {cart} = useContext(Context)
 
     return (

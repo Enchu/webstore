@@ -5,6 +5,7 @@ import BasketHeader from "./BasketHeader";
 import BasketFooter from "./BasketFooter";
 import BasketProduct from "./BasketProduct";
 import {observer} from "mobx-react-lite";
+import {IItems} from "../../Interface/Items";
 
 const Basket: FC = observer(() => {
     const {cart} = useContext(Context)
@@ -20,15 +21,7 @@ const Basket: FC = observer(() => {
                         <section className='cart'>
                             <BasketHeader/>
 
-                            {cart.orders.map((el: {
-                                id: number;
-                                title: string;
-                                img: any;
-                                desc: string;
-                                category: string;
-                                count: number
-                                price: number;
-                                totalprice: number; }) => (
+                            {cart.orders.map((el: IItems) => (
                                 <BasketProduct key={el.id} item={el}/>
                             ))}
 

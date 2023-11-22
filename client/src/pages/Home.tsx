@@ -1,15 +1,17 @@
-import React, {useContext} from 'react';
+import React, {FC, useContext} from 'react';
 import Items from "../components/items/Items";
 import {Context} from "../index";
 import {observer} from "mobx-react-lite";
 import SlideBar from "../components/slidebar/SlideBar";
 import '../styles/home.scss'
+import {IItems} from "../Interface/Items";
+import {ICategory} from "../Interface/Category";
 
 
-const Home = observer(() => {
+const Home : FC = observer(() => {
     const {cart} = useContext(Context)
 
-    const products = cart.currentCart.map((item) => {
+    const products = cart.currentCart.map((item: IItems) => {
         return <Items key={item.id} items={item}/>
     })
 
@@ -20,7 +22,7 @@ const Home = observer(() => {
             {/*</nav>*/}
             <main>
                 <div className="category">
-                    {cart.categories.map((category) => (
+                    {cart.categories.map((category: ICategory) => (
                         <div key={category.id} onClick={() => cart.chooseCategory(category)}>
                             {category.name}
                         </div>

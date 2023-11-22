@@ -1,10 +1,10 @@
-import React, {useContext} from 'react';
+import React, {FC, useContext} from 'react';
 import './style.scss'
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import {useNavigate} from "react-router-dom";
 
-const Items = observer(({items}) => {
+const Items: FC<any> = observer(({items}) => {
     const {img, title, desc, price, id} = items
     const {cart} = useContext(Context)
     const history = useNavigate()

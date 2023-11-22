@@ -4,13 +4,13 @@ import {observer} from "mobx-react-lite";
 import {useParams} from "react-router-dom";
 import './style.scss'
 import {FaCartPlus} from "react-icons/fa";
+import {IItems} from "../../Interface/Items";
 
-const ItemId: FC<any> = observer(() => {
+const ItemId: FC = observer(() => {
     const {cart} = useContext(Context)
     const {id} = useParams()
 
-    const selectedItem = cart.carts.find((item: any) => item.id == id);
-    console.log(selectedItem)
+    const selectedItem = cart.carts.find((item: IItems) => item.id == id);
 
     return (
         <div className='item-container'>

@@ -21,7 +21,7 @@ namespace ShopAPI
             builder.Services.AddCors(options => options.AddPolicy("CorsPolicy",
                 builder =>
                 {
-                    builder.WithOrigins("https://localhost:3000"); 
+                    builder.WithOrigins("https://localhost:3000", "http://localhost:3000"); 
                     builder.AllowAnyHeader();
                     builder.AllowAnyMethod();
                     builder.AllowCredentials();
