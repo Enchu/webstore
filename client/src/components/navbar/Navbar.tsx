@@ -9,6 +9,8 @@ import Order from "../order/Order";
 import internal from "stream";
 import {observer} from "mobx-react-lite";
 import ShowOrders from "../order/ShowOrders";
+import {FaUserCircle} from "react-icons/fa";
+import UserMenu from "../userMenu/UserMenu";
 
 const showNothing = () => {
     return (
@@ -18,10 +20,11 @@ const showNothing = () => {
 }
 
 const Navbar: FC = observer(() => {
-    const {cart} = useContext(Context)
+    const {cart, user} = useContext(Context)
 
     const [cartOpen, setCartOpen] = useState(false)
     const [authOpen, setAuthOpen] = useState(false)
+    const [userOpen, setUserOpen] = useState(false)
     const [isHovered, setIsHovered] = useState(false);
 
     const handleMouseEnter = () => {
@@ -62,9 +65,18 @@ const Navbar: FC = observer(() => {
                         </li>
 
                         <li className="nav-list__item">
-                            <span className='auth' onClick={() => setAuthOpen((prevCartOpen) => !prevCartOpen)}>
-                                Войти
-                            </span>
+                            {
+                                user.isAuth
+                                    ? (
+                                        <div className='navbar-avatar'>
+                                            <FaUserCircle onClick={() => setUserOpen((prevCartOpen) => !prevCartOpen)}/>
+                                        </div>
+                                    )
+                                    : (
+                                        <span className='auth' onClick={() => setAuthOpen((prevUserOpen) => !prevUserOpen)}>Войти</span>
+                                    )
+                            }
+
                         </li>
                     </ul>
 
@@ -90,8 +102,16 @@ const Navbar: FC = observer(() => {
                         authOpen && (
                             <div className='auth-cart'>
                                 <div className='dialog__container'>
-                                        <ModalAuth onClose={() => setAuthOpen(false)}/>
+                                    <ModalAuth onClose={() => setAuthOpen(false)}/>
                                 </div>
+                            </div>
+                        )
+                    }
+
+                    {
+                        userOpen && (
+                            <div className="navbar-user__menu">
+                                <UserMenu onClose={() => setUserOpen(false)}/>
                             </div>
                         )
                     }

@@ -40,6 +40,13 @@ header{
     font-size: 16px;
     font-weight: 500;
     font-family: 'Poppins', sans-serif;
+
+    .nav-list__item{
+        display: flex;
+        align-items: center;
+        position: relative;
+        justify-content: center;
+    }
 }
 
 .nav-list__link {
@@ -135,4 +142,26 @@ header{
     width: 100%;
     outline: 0;
     opacity: 1;
+}
+
+.navbar-avatar{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    font-size: 1.25rem;
+    align-items: center;
+    line-height: 1;
+    justify-content: center;
+}
+
+.navbar-user__menu{
+    z-index: 1600;
+    position: absolute;
+    inset: 0px 0px auto auto;
+    margin: 0px;
+    transform: translate(-128px, 55px);
+
+    background-color: rgba(0,0,0, 0.667);
 }

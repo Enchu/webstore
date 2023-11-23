@@ -4,12 +4,12 @@ export interface AuthenticatedContentProps {
 }
 
 export interface LoginFormProps {
-    onLogin: (email: string, password: string) => void;
+    onLogin: () => void;
     onRegisterClick?: () => void
 }
 
 export interface RegisterFormProps{
-    onRegister: (email: string, password: string) => void;
+    onRegister: () => void;
     onLoginClick?: () => void
 }
 

@@ -1,27 +1,55 @@
 import {$host} from "./index";
 import {jwtDecode} from "jwt-decode";
 
-export const registration = async (email, password) => {
+export const authLR =  async (method, url ,data = {}) => {
+    const response = await fetch(`${process.env.REACT_APP_API_URL + url}`, {
+        method: method,
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    localStorage.setItem('token', response.token)
+    return await response.json()
+}
+
+export const logout = async () => {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}api/logout`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+
+    localStorage.removeItem('token');
+
+    return await response.json()
+}
+
+export const check = async () => {
     try{
-        const {data} = await $host.post('api/registration', {email, password})
-        return jwtDecode(data)
+        const response = await fetch(`${process.env.REACT_APP_API_URL}api/user`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        localStorage.setItem('token', response.token)
+        return await response.json()
     }catch (e){
-        console.log('Error during registration:', e)
-        throw e
+        console.log(e)
     }
-}
 
-export const login = async (email, password) => {
-    try{
-        const {data} = await $host.post('api/login', {email, password})
-        return data
-    }catch (e) {
-        console.log('Error during login:', e)
-        throw e
-    }
-}
-
-export const check = async (email, password) => {
-    const {data} = await $host.post('api/registration')
-    return jwtDecode(data)
 }

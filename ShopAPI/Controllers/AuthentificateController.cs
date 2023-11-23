@@ -63,7 +63,9 @@ public class AuthentificateController: Controller
 
         return Ok(new
         {
-            message = "success"
+            message = "success",
+            token = jwt,
+            user = dto.Email
         });
     }
 

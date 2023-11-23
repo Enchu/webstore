@@ -19,17 +19,32 @@
 }
 
 .input-outline-root{
+  padding: 8px 0 4px;
+  width: 100%;
+  position: relative;
+
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 0;
+  vertical-align: top;
+}
+
+.input__auth{
   padding: 0 12px;
   border-radius: 16px;
   position: relative;
+
+  height: 100%;
   color: var(--text-primary);
+  background-color: #222223;
+  border: 2px solid #222223;
+
   cursor: text;
   display: inline-flex;
+
   font-size: 1rem;
   box-sizing: border-box;
   align-items: center;
-  width: 100%;
-  max-width: 300px;
 }
 
 .input-form-help{
@@ -38,6 +53,10 @@
   opacity: 1;
   font-size: .775rem;
   color: var(--text-secondary);
+
+  .error{
+    color: var(--error);
+  }
 }
 
 .etc{

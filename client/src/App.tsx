@@ -1,39 +1,47 @@
 import './styles/main.css'
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import ScrollToTop from "./utils/scrollToTop";
-import React from "react";
+import React, {useContext, useEffect, useState} from "react";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 import Home from "./pages/Home";
-import Auth from "./pages/Auth";
-import Registration from "./pages/Registration";
 import Basket from "./components/basket/Basket";
 import ItemId from "./components/items/ItemId";
 import Admin from "./pages/Admin";
+import {Context} from "./index";
 
 function App() {
-  return (
-      <BrowserRouter>
-          <div className="App">
-              <ScrollToTop/>
-              <Navbar/>
+    const {user} = useContext(Context)
 
-              <Routes>
-                  <Route path="/" element={<Home/>} />
-                  <Route path="/auth" element={<Auth/>} />
-                  <Route path="/registration" element={<Registration/>} />
-                  <Route path="/item">
-                      <Route path=":id" element={<ItemId />}/>
-                  </Route>
-                  <Route path="/basket" element={<Basket/>} />
-                  <Route path="/admin" element={<Admin/>} />
-              </Routes>
+    useEffect(() => {
+        // check().then(data => {
+        //     user.setUser(true)
+        //     user.setIsAuth(true)
+        // })
+        user.setUser(false)
+        user.setIsAuth(false)
+    }, []);
 
-              <Footer/>
-              {/*<ExampleForm/>*/}
-          </div>
-      </BrowserRouter>
-  );
+    return (
+        <BrowserRouter>
+            <div className="App">
+                <ScrollToTop/>
+                <Navbar/>
+
+                <Routes>
+                    <Route path="/" element={<Home/>} />
+                    <Route path="/item">
+                        <Route path=":id" element={<ItemId />}/>
+                    </Route>
+                    <Route path="/basket" element={<Basket/>} />
+                    <Route path="/admin" element={<Admin/>} />
+                </Routes>
+
+                <Footer/>
+                {/*<ExampleForm/>*/}
+            </div>
+        </BrowserRouter>
+    );
 }
 
 export default App;

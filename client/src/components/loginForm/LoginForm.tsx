@@ -1,16 +1,45 @@
-import React, {FC, SyntheticEvent, useContext, useState} from 'react';
+import React, {FC, SyntheticEvent, useContext, useEffect, useState} from 'react';
 import {LoginFormProps} from "../../Interface/Auth";
 import './style.scss'
 import { IoEye, IoEyeOff } from 'react-icons/io5';
-import {login} from "../../http/userApi";
+import {authLR} from "../../http/userApi";
 import {Context} from "../../index";
+import {observer} from "mobx-react-lite";
+import {useValidation} from "../../utils/useValidation";
 
-const LoginForm:FC<LoginFormProps> = ({ onLogin, onRegisterClick }) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+const LoginForm:FC<LoginFormProps> = observer(({ onLogin, onRegisterClick }) => {
+    const {user} = useContext(Context)
     const [showPassword, setShowPassword] = useState(false);
 
-    const {user} = useContext(Context)
+    const useInput = (initialValue: any, validations: any) => {
+        const [value, setValue] = useState(initialValue)
+        const [isDirty, setDirty] = useState(false)
+        const { errorMsgs, inputValid, ...valid } = useValidation(value, validations);
+
+        const onChange = (e: any) => {
+            setValue(e.target.value)
+        }
+
+        const onBlur = () => {
+            setDirty(true)
+        }
+
+        return {
+            value,
+            onChange,
+            onBlur,
+            isDirty,
+            errorMsgs,
+            inputValid,
+            ...valid
+        }
+    }
+
+    const email = useInput('',{isEmpty: true, minLenght: 3, isEmail: true});
+    const password = useInput('',{isEmpty: true, minLenght: 3, maxLenght: 40});
+
+    const errorEmailMessages = Object.values(email.errorMsgs).filter(Boolean).join(', ');
+    const errorPasswordMessages = Object.values(password.errorMsgs).filter(Boolean).join(', ');
 
     const toggleShowPassword = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -18,36 +47,29 @@ const LoginForm:FC<LoginFormProps> = ({ onLogin, onRegisterClick }) => {
 
     const handleLogin = async (e: any) => {
         e.preventDefault()
-        //onLogin(email, password);
+
+        const loginData = {
+            email: email,
+            password: password,
+        };
 
         try {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}api/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email: email,
-                    password: password,
-                }),
-            });
+            let users = await authLR('POST','api/login', loginData)
+                .then((data) => {
+                    console.log(data);
+                })
+                .catch((error) => {
+                    console.error('Error during login:', error);
+                });
 
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
+            user.setUser(users)
+            user.setIsAuth(true)
 
-            const data = await response.json();
-
-            console.log(data);
-        } catch (error) {
-            console.error('Error fetching data:', error);
+            onLogin();
         }
-
-        // let users = await login(email, password)
-        // console.log(users)
-        //
-        // user.setUser(user)
-        // user.isAuth(true)
+        catch (e){
+            console.error('Error during login:', e);
+        }
     };
 
     return (
@@ -55,25 +77,32 @@ const LoginForm:FC<LoginFormProps> = ({ onLogin, onRegisterClick }) => {
             <h5 className={`typography_h5`}>Войти в аккаунт</h5>
             <form className={`login-form`}>
                 <div className={`input-outline-root`}>
-                    <input
-                        className={`login_input-label`}
-                        placeholder={`Email`} type="text"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}/>
-                    {/*<p className={`input-form-help`}></p>*/}
+                    <div className={`input__auth`}>
+                        <input
+                            className={`login_input-label`}
+                            placeholder={`Email`} type="text"
+                            value={email.value}
+                            onChange={(e) => email.onChange(e)}
+                            onBlur={email.onBlur}
+                        />
+                    </div>
+
+                    {(email.isDirty && errorEmailMessages) && <p className={`input-form-help`}>{errorEmailMessages}</p>}
                 </div>
 
                 <div className={`input-outline-root`}>
-                    <input
-                        className={`login_input-label`}
-                        placeholder={`Password`}
-                        type={showPassword ? 'text' : 'password'}
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}/>
-                    <span className={`password-toggle`} onClick={toggleShowPassword}>
-                        {showPassword ? <IoEyeOff /> : <IoEye />}
-                    </span>
-                    {/*<p className={`input-form-help`}/>*/}
+                    <div className={`input__auth`}>
+                        <input
+                            className={`login_input-label`}
+                            placeholder={`Password`}
+                            type={showPassword ? 'text' : 'password'}
+                            value={password.value}
+                            onChange={(e) => password.onChange(e)}
+                            onBlur={password.onBlur}
+                        />
+                        <span className={`password-toggle`} onClick={toggleShowPassword}>{showPassword ? <IoEyeOff /> : <IoEye />}</span>
+                    </div>
+                    { (email.isDirty && errorPasswordMessages) && <p className={`input-form-help`}>{errorPasswordMessages}</p> }
                 </div>
 
                 <div className={`forgot-password etc`}>
@@ -82,7 +111,7 @@ const LoginForm:FC<LoginFormProps> = ({ onLogin, onRegisterClick }) => {
                         </span>
                 </div>
 
-                <button onClick={(e) => handleLogin(e)} className="login-form-button button_button-cisl">
+                <button onClick={(e) => handleLogin(e)} className="login-form-button button_button-cisl" disabled={email.inputValid}>
                     <span className={`login_button_label`}>Войти</span>
                 </button>
             </form>
@@ -92,6 +121,6 @@ const LoginForm:FC<LoginFormProps> = ({ onLogin, onRegisterClick }) => {
             </p>
         </div>
     );
-};
+});
 
 export default LoginForm;
