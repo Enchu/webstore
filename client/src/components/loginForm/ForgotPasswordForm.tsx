@@ -10,8 +10,8 @@ const ForgotPasswordForm: FC = () => {
     return (
         <div>
             <h5 className={`typography_h5`}>Забыли пароль</h5>
-            <form className={`login-form`}>
-                <div className={`input-outline-root`}>
+            <form className={`auth-form`}>
+                <div className={`auth-input__outline-root`}>
                     <input className={`login_input-label`} placeholder={`Email`} type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                     {/*<p className={`input-form-help`}></p>*/}
                 </div>

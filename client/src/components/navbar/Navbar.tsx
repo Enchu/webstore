@@ -26,6 +26,7 @@ const Navbar: FC = observer(() => {
     const [authOpen, setAuthOpen] = useState(false)
     const [userOpen, setUserOpen] = useState(false)
     const [isHovered, setIsHovered] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('')
 
     const handleMouseEnter = () => {
         setCartOpen((prevCartOpen) => !prevCartOpen)
@@ -37,6 +38,11 @@ const Navbar: FC = observer(() => {
         setIsHovered(false);
     };
 
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(e.target.value);
+        cart.filterItemsBySearch(e.target.value);
+    };
+
     const activeLink = 'nav-list__link nav-list__link--active'
     const normalLink = 'nav-list__link'
 
@@ -45,9 +51,20 @@ const Navbar: FC = observer(() => {
             <div className="container">
                 <div className="nav-row">
 
-                    <NavLink to='/' className="logo">
+                    <NavLink to='/' className="nav-logo">
                         <strong>Enchu</strong>
                     </NavLink>
+
+                    <div className="nav-search">
+                        <input
+                            value={searchTerm}
+                            autoComplete="off"
+                            placeholder="Поиск"
+                            onChange={(e) => handleSearch(e)}
+                            type="text"
+                            className="nav-search-input"
+                        />
+                    </div>
 
                     <BtnDarkMode/>
 
@@ -58,11 +75,11 @@ const Navbar: FC = observer(() => {
                             </NavLink>
                         </li>
 
-                        <li className="nav-list__item">
-                            <NavLink to='/admin' className={({isActive}) => isActive ? activeLink : normalLink}>
-                                Admin
-                            </NavLink>
-                        </li>
+                        {/*<li className="nav-list__item">*/}
+                        {/*    <NavLink to='/admin' className={({isActive}) => isActive ? activeLink : normalLink}>*/}
+                        {/*        Admin*/}
+                        {/*    </NavLink>*/}
+                        {/*</li>*/}
 
                         <li className="nav-list__item">
                             {
@@ -76,8 +93,8 @@ const Navbar: FC = observer(() => {
                                         <span className='auth' onClick={() => setAuthOpen((prevUserOpen) => !prevUserOpen)}>Войти</span>
                                     )
                             }
-
                         </li>
+
                     </ul>
 
                     <NavLink to={'/basket'}>

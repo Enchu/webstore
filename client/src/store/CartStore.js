@@ -1,6 +1,5 @@
 import {makeAutoObservable} from "mobx";
 import any from "../image/any.png";
-
 export default class CartStore {
     constructor() {
         this._cart = [
@@ -158,6 +157,16 @@ export default class CartStore {
         } else{
             this._currentCart = this._cart.filter(el => el.category === category.id);
         }
+    }
 
+    filterItemsBySearch(searchTerm) {
+        if (!searchTerm.trim()) {
+            this.setCurrentCart(this.carts);
+        } else {
+            const filteredItems = this.carts.filter((item) =>
+                item.title.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            this.setCurrentCart(filteredItems);
+        }
     }
 }

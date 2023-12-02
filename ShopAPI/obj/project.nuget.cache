@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nqoCgwlNwUZncOTKSV51rWaRrHKUhNjl5ixIomLdrFSnsZusq8gRLc8KU26SdM2WmVxKy28NGk7YlxhykmbDAA==",
+  "dgSpecHash": "NTO9p/Yxl9oops5/PBjb5crvnE2Ve9KEG6PjLY2ldMNEMVqStoSY+fvYZOhQ16D607KE5LqLDSkmqPykAH+n0A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\aleck\\source\\repos\\ShopAPI\\ShopAPI\\ShopAPI.csproj",
+  "projectFilePath": "D:\\RABITA\\Rider\\ShopAPI\\ShopAPI\\ShopAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\aleck\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\aleck\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

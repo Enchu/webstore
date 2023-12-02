@@ -3,17 +3,21 @@ import {RegisterFormProps} from "../../Interface/Auth";
 import {IoEye, IoEyeOff} from "react-icons/io5";
 import {authLR} from "../../http/userApi";
 import {observer} from "mobx-react-lite";
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 const RegisterForm: FC<RegisterFormProps> = observer(({onRegister ,onLoginClick }) => {
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [repassword, setRePassword] = useState('')
+    const initialValues = {
+        name: '',
+        email: '',
+        password: '',
+        repassword: '',
+    };
+
+    const [isActive, setIsActive] = useState(false)
 
     const [showPassword, setShowPassword] = useState(false)
     const [showRePassword, setReShowPassword] = useState(false)
-
-    const [isActive, setIsActive] = useState(false)
 
     const toggleShowPassword = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -23,101 +27,118 @@ const RegisterForm: FC<RegisterFormProps> = observer(({onRegister ,onLoginClick 
         setReShowPassword((prevShowPassword) => !prevShowPassword);
     }
 
-    const handleRegister = async (e: SyntheticEvent) => {
-        e.preventDefault()
-
-        if(password !== repassword){
-            setIsActive(true)
-            return
-        }
-
-        const loginData = {
-            name: name,
-            email: email,
-            password: password,
-        };
+    const handleRegister = async (values: any) => {
+        const { name, email, password } = values;
 
         try {
-            let users = await authLR('POST','api/register', loginData)
-                .then((data) => {
-                    console.log(data);
-                })
-                .catch((error) => {
-                    console.error('Error during login:', error);
-                });
+            const loginData = {
+                name: name,
+                email: email,
+                password: password,
+            };
+
+            if((loginData.name && loginData.email && loginData.password) != ''){
+
+                let users = await authLR('POST','api/register', loginData)
+                    .then((data) => {
+                        console.log(data);
+                    })
+                    .catch((error) => {
+                        console.error('Error during registration:', error);
+                    });
+
+                onRegister();
+
+            }else{
+                return
+            }
         }
         catch (e){
-            console.error('Error during login:', e);
+            console.error('Error during registration:', e);
         }
-
-        onRegister();
     }
+
+    const validationSchema = Yup.object().shape({
+        name: Yup.string().required('Required'),
+        email: Yup.string().email('Invalid email').required('Required'),
+        password: Yup.string().min(6, 'Password must be at least 6 characters').required('Required'),
+        repassword: Yup.string()
+            .oneOf([Yup.ref('password'), undefined], 'Passwords must match')
+            .required('Required'),
+    });
 
     return (
         <div>
             <h5 className={`typography_h5`}>Зарегистрировать аккаунт</h5>
-            <form className={`login-form`}>
+            <Formik
+                initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleRegister}
+            >
+                {() => (
+                    <form className={`auth-form`}>
 
-                <div className={`input-outline-root`}>
-                    <div className={`input__auth`}>
-                        <input
-                            className={`login_input-label`}
-                            placeholder={`Name`}
-                            type="text"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}/>
-                    </div>
-                    {/*<p className={`input-form-help`}></p>*/}
-                </div>
+                        <div className={`auth-input__outline-root`}>
+                            <div className={`input__auth`}>
+                                <Field
+                                    className={`login_input-label`}
+                                    placeholder={`Name`}
+                                    type="text"
+                                    name="name"
+                                />
+                            </div>
+                            <ErrorMessage name="name" component="p" className="input-form-help" />
+                        </div>
 
-                <div className={`input-outline-root`}>
-                    <div className={`input__auth`}>
-                        <input
-                            className={`login_input-label`}
-                            placeholder={`Email`}
-                            type="text"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}/>
-                        <p className={isActive ? 'input-form-help': 'input-form-help error' }/>
-                    </div>
-                </div>
+                        <div className={`auth-input__outline-root`}>
+                            <div className={`input__auth`}>
+                                <Field
+                                    className={`login_input-label`}
+                                    placeholder={`Email`}
+                                    type="text"
+                                    name="email"
+                                />
+                                <p className={isActive ? 'input-form-help': 'input-form-help error' }/>
+                            </div>
+                            <ErrorMessage name="email" component="p" className="input-form-help" />
+                        </div>
 
-                <div className={`input-outline-root`}>
-                    <div className={`input__auth`}>
-                        <input
-                            className={`login_input-label`}
-                            placeholder={`Password`}
-                            type={showPassword ? 'text' : 'password'}
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}/>
+                        <div className={`auth-input__outline-root`}>
+                            <div className={`input__auth`}>
+                                <Field
+                                    className={`login_input-label`}
+                                    placeholder={`Password`}
+                                    type={showPassword ? 'text' : 'password'}
+                                    name="password"
+                                />
 
-                        <span className={`password-toggle`} onClick={toggleShowPassword}>
-                            {showPassword ? <IoEyeOff /> : <IoEye />}
-                        </span>
-                    </div>
-                    {/*<p className={`input-form-help`}/>*/}
-                </div>
+                                <span className={`password-toggle`} onClick={toggleShowPassword}>
+                                    {showPassword ? <IoEyeOff /> : <IoEye />}
+                                </span>
+                            </div>
+                            <ErrorMessage name="password" component="p" className="input-form-help" />
+                        </div>
 
-                <div className={`input-outline-root`}>
-                    <div className={`input__auth`}>
-                        <input
-                            className={`login_input-label`}
-                            placeholder={`Re Password`}
-                            type={showRePassword ? 'text' : 'password'}
-                            value={repassword}
-                            onChange={(e) => setRePassword(e.target.value)}/>
+                        <div className={`auth-input__outline-root`}>
+                            <div className={`input__auth`}>
+                                <Field
+                                    className={`login_input-label`}
+                                    placeholder={`Re Password`}
+                                    type={showRePassword ? 'text' : 'password'}
+                                    name="repassword"
+                                />
+                                <span className={`password-toggle`} onClick={toggleShowRePassword}>
+                                    {showRePassword ? <IoEyeOff /> : <IoEye />}
+                                </span>
+                            </div>
 
-                        <span className={`password-toggle`} onClick={toggleShowRePassword}>
-                            {showRePassword ? <IoEyeOff /> : <IoEye />}
-                        </span>
-                    </div>
-                    {/*<p className={`input-form-help`}/>*/}
-                </div>
+                            <ErrorMessage name="repassword" component="p" className="input-form-help" />
+                        </div>
 
-                <button onClick={(e) => handleRegister(e)} className="login-form-button button_button-cisl">
-                    <span className={`login_button_label`}>Регистрация</span>
-                </button>
-            </form>
+                        <button onClick={(e) => handleRegister(e)} className="login-form-button button_button-cisl">
+                            <span className={`login_button_label`}>Регистрация</span>
+                        </button>
+                    </form>
+                )}
+            </Formik>
 
             <p className={`p-fz tz`}>Уже есть аккаунт?</p>
             <p className={`p-fz typography_color-primary th`} onClick={onLoginClick}>

@@ -1,4 +1,4 @@
-import React, {FC, useContext} from 'react';
+import React, {FC, useContext, useDeferredValue, useEffect, useMemo, useState} from 'react';
 import Items from "../components/items/Items";
 import {Context} from "../index";
 import {observer} from "mobx-react-lite";
@@ -21,16 +21,19 @@ const Home : FC = observer(() => {
             {/*    <SlideBar />*/}
             {/*</nav>*/}
             <main>
-                <div className="category">
+
+                <div className="main-category">
                     {cart.categories.map((category: ICategory) => (
                         <div key={category.id} onClick={() => cart.chooseCategory(category)}>
                             {category.name}
                         </div>
                     ))}
                 </div>
+
                 <div className='main-items'>
                     {products}
                 </div>
+
             </main>
         </div>
     );

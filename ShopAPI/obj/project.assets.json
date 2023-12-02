@@ -3930,11 +3930,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\aleck\\source\\repos\\ShopAPI\\ShopAPI\\ShopAPI.csproj",
+      "projectUniqueName": "D:\\RABITA\\Rider\\ShopAPI\\ShopAPI\\ShopAPI.csproj",
       "projectName": "ShopAPI",
-      "projectPath": "C:\\Users\\aleck\\source\\repos\\ShopAPI\\ShopAPI\\ShopAPI.csproj",
+      "projectPath": "D:\\RABITA\\Rider\\ShopAPI\\ShopAPI\\ShopAPI.csproj",
       "packagesPath": "C:\\Users\\aleck\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\aleck\\source\\repos\\ShopAPI\\ShopAPI\\obj\\",
+      "outputPath": "D:\\RABITA\\Rider\\ShopAPI\\ShopAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4035,7 +4035,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

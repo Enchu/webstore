@@ -4,48 +4,64 @@ header{
 }
 
 .nav {
-    padding: 20px 0;
+    padding: 10px 0;
     border-bottom: 1px solid var(--dark-border);
     background-color: var(--dark-bg);
     color: var(--header-text);
     letter-spacing: normal;
-}
 
-.nav-row {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    column-gap: 30px;
-    row-gap: 20px;
-    flex-wrap: wrap;
-}
-
-.logo {
-    margin-right: auto;
-    color: var(--header-text);
-    font-size: 24px;
-    font-family: 'Poppins', sans-serif;
-}
-
-.logo strong {
-    font-weight: 700;
-}
-
-.nav-list {
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    row-gap: 10px;
-    column-gap: 40px;
-    font-size: 16px;
-    font-weight: 500;
-    font-family: 'Poppins', sans-serif;
-
-    .nav-list__item{
+    .nav-row {
         display: flex;
+        justify-content: space-between;
         align-items: center;
-        position: relative;
-        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+
+        .nav-logo {
+            color: var(--header-text);
+            font-size: 24px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            margin-right: auto;
+        }
+
+        .nav-search{
+            margin-right: auto;
+            display: flex;
+            align-items: center;
+            text-align: center;
+
+            padding: 0.5rem 1rem;
+
+            border: 1px solid rgba(155,154,151, 0.4);
+            border-radius: 30px;
+
+            .nav-search-input{
+                margin-left: 0.5rem;
+                background-color: transparent;
+                color: var(--white);
+                outline: none;
+                border: none;
+            }
+        }
+
+        .nav-list {
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            row-gap: 10px;
+            column-gap: 40px;
+            font-size: 16px;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+
+            .nav-list__item{
+                display: flex;
+                align-items: center;
+                position: relative;
+                justify-content: center;
+            }
+        }
     }
 }
 

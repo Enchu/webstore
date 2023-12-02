@@ -7,6 +7,7 @@ interface ImageProps {
     alt: string;
     className?: string;
 }
+
 const Image: React.FC<ImageProps> = ({img, alt, className }) => {
     if(!img){
         img = any

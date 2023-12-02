@@ -26,6 +26,8 @@ const Basket: FC = observer(() => {
                             ))}
 
                             <BasketFooter/>
+
+                            <button>Check out</button>
                         </section>
                     </div>
                 </div>
