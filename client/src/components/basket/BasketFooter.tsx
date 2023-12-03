@@ -6,17 +6,14 @@ import {IItems} from "../../Interface/Items";
 const BasketFooter: FC = () => {
     const {cart} = useContext(Context)
 
-    let summa = 0
-    cart.orders.forEach((el: IItems) => summa += Number.parseFloat(el.price))
-
-    let count = 0
-    cart.orders.forEach((el: IItems) => count += el.count)
+    const totalPrice = cart.orders.reduce((acc: number, el: IItems) => acc + Number.parseFloat(el.price), 0);
+    const totalCount = cart.orders.reduce((acc: number, el: IItems) => acc + el.count, 0);
 
     return (
         <div className='cart-footer'>
-            <div className='cart-footer__count'> {count} ед.</div>
+            <div className='cart-footer__count'> {totalCount} ед.</div>
             <div className='cart-footer__price'>
-                {new Intl.NumberFormat().format(summa)} $
+                {new Intl.NumberFormat().format(totalPrice)} $
             </div>
         </div>
     );

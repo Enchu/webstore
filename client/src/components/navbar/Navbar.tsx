@@ -20,38 +20,32 @@ const showNothing = () => {
 }
 
 const Navbar: FC = observer(() => {
-    const {cart, user} = useContext(Context)
+    const { cart, user } = useContext(Context);
 
-    const [cartOpen, setCartOpen] = useState(false)
-    const [authOpen, setAuthOpen] = useState(false)
-    const [userOpen, setUserOpen] = useState(false)
-    const [isHovered, setIsHovered] = useState(false);
-    const [searchTerm, setSearchTerm] = useState('')
+    const [cartOpen, setCartOpen] = useState(false);
+    const [authOpen, setAuthOpen] = useState(false);
+    const [userOpen, setUserOpen] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
 
     const handleMouseEnter = () => {
-        setCartOpen((prevCartOpen) => !prevCartOpen)
-        setIsHovered(true);
+        setCartOpen(true);
     };
 
     const handleMouseLeave = () => {
-        setCartOpen((prevCartOpen) => !prevCartOpen)
-        setIsHovered(false);
+        setCartOpen(false);
     };
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchTerm(e.target.value);
-        cart.filterItemsBySearch(e.target.value);
+        const term = e.target.value;
+        setSearchTerm(term);
+        cart.filterItemsBySearch(term);
     };
-
-    const activeLink = 'nav-list__link nav-list__link--active'
-    const normalLink = 'nav-list__link'
 
     return (
         <header className="nav">
             <div className="container">
                 <div className="nav-row">
-
-                    <NavLink to='/' className="nav-logo">
+                    <NavLink to="/" className="nav-logo">
                         <strong>Enchu</strong>
                     </NavLink>
 
@@ -60,79 +54,71 @@ const Navbar: FC = observer(() => {
                             value={searchTerm}
                             autoComplete="off"
                             placeholder="Поиск"
-                            onChange={(e) => handleSearch(e)}
+                            onChange={handleSearch}
                             type="text"
                             className="nav-search-input"
                         />
                     </div>
 
-                    <BtnDarkMode/>
+                    <BtnDarkMode />
 
                     <ul className="nav-list">
                         <li className="nav-list__item">
-                            <NavLink to='/' className={({isActive}) => isActive ? activeLink : normalLink}>
+                            <NavLink to="/" className="nav-list__link">
                                 Home
                             </NavLink>
                         </li>
 
-                        {/*<li className="nav-list__item">*/}
-                        {/*    <NavLink to='/admin' className={({isActive}) => isActive ? activeLink : normalLink}>*/}
-                        {/*        Admin*/}
-                        {/*    </NavLink>*/}
-                        {/*</li>*/}
-
                         <li className="nav-list__item">
-                            {
-                                user.isAuth
-                                    ? (
-                                        <div className='navbar-avatar'>
-                                            <FaUserCircle onClick={() => setUserOpen((prevCartOpen) => !prevCartOpen)}/>
-                                        </div>
-                                    )
-                                    : (
-                                        <span className='auth' onClick={() => setAuthOpen((prevUserOpen) => !prevUserOpen)}>Войти</span>
-                                    )
+                            {user.isAuth
+                                ? (
+                                    <div className="navbar-avatar">
+                                        <FaUserCircle onClick={() => setUserOpen((prevUserOpen) => !prevUserOpen)} />
+                                    </div>
+                                )
+                                : (
+                                    <span className="auth" onClick={() => setAuthOpen((prevAuthOpen) => !prevAuthOpen)}>
+                                        Войти
+                                    </span>
+                                )
                             }
                         </li>
-
                     </ul>
 
-                    <NavLink to={'/basket'}>
-                        <FaBasketShopping
-                            onMouseEnter={handleMouseEnter}
-                            onMouseLeave={handleMouseLeave}
-                            className={`shop-cart-button ${isHovered && 'active'}`}
-                        />
-                    </NavLink>
+                    <div className="cart-container" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                        <div className="cart-icon">
+                            <NavLink to={cart.orders.length > 0 ? '/basket' : '/'}>
+                                <FaBasketShopping className={`shop-cart-button ${cart.orders.length > 0 ? 'active' : ''}`} />
+                            </NavLink>
 
-                    {isHovered && (
-                        <div className='shop-cart' onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                             {cartOpen && (
-                                <div className='shop-cart-content'>
-                                    {cart.orders.length > 0 ? <ShowOrders props={cart} /> : showNothing()}
+                                <div className="shop-cart">
+                                    {cart.orders.length > 0
+                                        ? (
+                                            <div className="shop-cart-content">
+                                                <ShowOrders props={cart} />
+                                            </div>
+                                        )
+                                        : showNothing()
+                                    }
                                 </div>
                             )}
                         </div>
+                    </div>
+
+                    {authOpen && (
+                        <div className="auth-cart">
+                            <div className="dialog__container">
+                                <ModalAuth onClose={() => setAuthOpen(false)} />
+                            </div>
+                        </div>
                     )}
 
-                    {
-                        authOpen && (
-                            <div className='auth-cart'>
-                                <div className='dialog__container'>
-                                    <ModalAuth onClose={() => setAuthOpen(false)}/>
-                                </div>
-                            </div>
-                        )
-                    }
-
-                    {
-                        userOpen && (
-                            <div className="navbar-user__menu">
-                                <UserMenu onClose={() => setUserOpen(false)}/>
-                            </div>
-                        )
-                    }
-
+                    {userOpen && (
+                        <div className="navbar-user__menu">
+                            <UserMenu onClose={() => setUserOpen(false)} />
+                        </div>
+                    )}
                 </div>
             </div>
         </header>

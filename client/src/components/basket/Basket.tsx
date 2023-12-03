@@ -6,6 +6,7 @@ import BasketFooter from "./BasketFooter";
 import BasketProduct from "./BasketProduct";
 import {observer} from "mobx-react-lite";
 import {IItems} from "../../Interface/Items";
+import {NavLink} from "react-router-dom";
 
 const Basket: FC = observer(() => {
     const {cart} = useContext(Context)
@@ -27,7 +28,14 @@ const Basket: FC = observer(() => {
 
                             <BasketFooter/>
 
-                            <button>Check out</button>
+                            <div className='cart-check'>
+                                <button className='cart-check__button'>
+                                    <NavLink to='/checkouts'>
+                                        Check out
+                                    </NavLink>
+                                </button>
+                            </div>
+
                         </section>
                     </div>
                 </div>
