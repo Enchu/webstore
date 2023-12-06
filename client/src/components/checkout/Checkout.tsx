@@ -1,7 +1,10 @@
 import React, {FC, useEffect, useState} from 'react';
 import './style.scss'
-import InputMask from "react-input-mask";
 import {useCookies} from "react-cookie";
+import axios from "axios";
+import {City} from "../../Interface/City";
+import { XMLParser } from 'fast-xml-parser';
+import MaskedInput from 'react-text-mask';
 
 const Checkout: FC = () => {
     const [cookies, setCookie] = useCookies(['userData']);
@@ -31,6 +34,61 @@ const Checkout: FC = () => {
         setFormData(updatedData);
         setCookie('userData', updatedData, { path: '/' });
     };
+
+    const apiKey = process.env.CDEK_TEST_API;
+    const deliveryEndpoint = 'https://integration.cdek.ru/pvzlist/v1/json';
+    const citiesEndpoint = 'https://integration.cdek.ru/v1/location/cities';
+
+    const [cities, setCities] = useState<City[]>([]);
+
+    const getDeliveryInfo = async () => {
+        try {
+            const response = await axios.post(deliveryEndpoint, {}, {
+                headers: {
+                    Authorization: `Bearer ${apiKey}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            console.log(response.data);
+            return response.data;
+        } catch (error) {
+            console.error('Ошибка при получении информации о доставке:', error);
+            throw error;
+        }
+    };
+
+    const getCityList = async () => {
+        try {
+            const response = await axios.get(citiesEndpoint);
+            const xmlData = response.data;
+
+            const options = {
+                ignoreAttributes: false,
+                attributeNamePrefix: '',
+            };
+
+            const parser = new XMLParser(options);
+            const jsonObj = parser.parse(xmlData);
+
+            const cities = jsonObj.Locations.Location.map((city: any) => ({
+                cityName: city.cityName,
+                cityCode: city.cityCode,
+                cityUuid: city.cityUuid,
+            }));
+
+            setCities(cities);
+
+            return cities;
+        } catch (error) {
+            console.error('Ошибка при получении списка городов:', error);
+            throw error;
+        }
+    }
+
+    useEffect(() => {
+        getCityList();
+    }, []);
 
     return (
         <>
@@ -113,8 +171,12 @@ const Checkout: FC = () => {
                                 <div className="checkout-base">
                                     <label>Region</label>
                                     <div className='checkout-base__border'>
-                                        <select name="country">
-                                            <option value="1">Москва</option>
+                                        <select className='checkout-base__select'>
+                                            {cities.map((city) => (
+                                                <option key={city.cityUuid} value={city.cityCode}>
+                                                    {city.cityName}
+                                                </option>
+                                            ))}
                                         </select>
                                     </div>
                                 </div>
@@ -134,13 +196,13 @@ const Checkout: FC = () => {
                                 <div className="checkout-base">
                                     <label>Phone</label>
                                     <div className='checkout-base__border'>
-                                        <InputMask
-                                            mask="+7 (999) 999-99-99"
-                                            placeholder="+7"
-                                            type="text"
-                                            name="phone"
+                                        <MaskedInput
+                                            mask={['+', '7', ' ', '(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}
+                                            placeholder="+7 (___) ___-__-__"
+                                            guide={false}
                                             value={formData.phone}
                                             onChange={handleChange}
+                                            name="phone"
                                         />
                                     </div>
                                 </div>
@@ -149,15 +211,15 @@ const Checkout: FC = () => {
                         </div>
                     </div>
 
-                    <div className="checkout-shipping">
-                        <h2>Shipping method</h2>
-                        <div className="">
-                            123
-                        </div>
-                    </div>
-                    <div className="Payment">
-                        123
-                    </div>
+                    {/*<div className="checkout-shipping">*/}
+                    {/*    <h2>Shipping method</h2>*/}
+                    {/*    <div className="">*/}
+                    {/*        123*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
+                    {/*<div className="Payment">*/}
+                    {/*    123*/}
+                    {/*</div>*/}
                 </div>
             </div>
         </>
