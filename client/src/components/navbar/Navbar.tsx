@@ -27,6 +27,9 @@ const Navbar: FC = observer(() => {
     const [userOpen, setUserOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
 
+    const activeLink = 'nav-list__link nav-list__link--active'
+    const normalLink = 'nav-list__link'
+
     const handleMouseEnter = () => {
         setCartOpen(true);
     };
@@ -67,6 +70,10 @@ const Navbar: FC = observer(() => {
                             <NavLink to="/" className="nav-list__link">
                                 Home
                             </NavLink>
+                        </li>
+
+                        <li className="nav-list__item">
+                            <NavLink to='/contacts' className={({isActive}) => isActive ? activeLink : normalLink}>Contacts</NavLink>
                         </li>
 
                         <li className="nav-list__item">

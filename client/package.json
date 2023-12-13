@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@pbe/react-yandex-maps": "^1.2.5",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -67,6 +68,7 @@
   "devDependencies": {
     "@types/react-input-mask": "^3.0.5",
     "@types/react-text-mask": "^5.4.14",
-    "@types/xml2js": "^0.4.14"
+    "@types/xml2js": "^0.4.14",
+    "@yandex/ymaps3-types": "^0.0.19"
   }
 }

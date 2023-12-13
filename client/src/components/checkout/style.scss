@@ -49,14 +49,15 @@
       }
 
       .checkout-base__border{
-        display: flex;
-        align-items: center;
+        max-height: 48px;
 
-        .checkout-base__select{
+        input, select{
+          display: flex;
+          align-items: center;
+
           width: 100%;
-          height: 48px;
           line-height: 1.5;
-          padding: 15px 10px 5px;
+          padding: 20px 15px 5px;
           text-decoration: inherit;
           border: none;
           outline: none;
@@ -65,19 +66,43 @@
             background-color: #21212d;
           }
         }
+      }
 
-        input, select, Select{
+      .custom-select{
+        &__control {
           width: 100%;
-          height: 48px;
-          line-height: 1.5;
-          padding: 15px 10px 5px;
-          text-decoration: inherit;
+          padding: 10px 5px 5px;
+
+          background-color: transparent;
           border: none;
-          outline: none;
+          border-radius: 0;
+          box-shadow: none;
         }
 
-        option{
-          background-color: #21212d;
+        &__menu{
+          background-color: #292a2e;
+        }
+
+        &__option {
+          cursor: pointer;
+          &--is-focused{
+            background-color: lighten(#292a2e, 8%);
+          }
+        }
+
+        &-container{
+          > div{
+            outline: none;
+            box-shadow: none;
+          }
+
+          &:hover, &--menu-is-open{
+            border-color: #ced4da;
+          }
+        }
+
+        &__single-value {
+          color: inherit;
         }
       }
     }
@@ -92,5 +117,60 @@
         margin-bottom: 15px;
       }
     }
+
+    .checkout-delivery__option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+
+      h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      .checkout-base__border {
+        display: flex;
+        gap: 10px;
+
+        button {
+          padding: 10px 20px;
+          font-size: 16px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+
+        button.selected {
+          background-color: #4CAF50;
+          color: white;
+        }
+
+        button.disabled {
+          background-color: #D3D3D3;
+          color: #A9A9A9;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}
+
+.animate-scaleIn{
+  animation: scaleIn .4s ease-in-out;
+}
+
+@keyframes scaleIn {
+  0%{
+    opacity: 0;
+    transform: scale(0.9)
+  }
+  50%{
+    opacity: 0.3;
+  }
+  100%{
+    opacity: 1;
+    transform: scale(1);
   }
 }

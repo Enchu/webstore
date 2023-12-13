@@ -10,6 +10,7 @@ import ItemId from "./components/items/ItemId";
 import Admin from "./pages/Admin";
 import {Context} from "./index";
 import Checkout from "./components/checkout/Checkout";
+import Contact from "./pages/Contact";
 
 function App() {
     const {user} = useContext(Context)
@@ -37,6 +38,7 @@ function App() {
                     <Route path="/basket" element={<Basket/>} />
                     <Route path="/admin" element={<Admin/>} />
                     <Route path="/checkouts" element={<Checkout/>}/>
+                    <Route path="/contacts" element={<Contact/>}/>
                 </Routes>
 
                 <Footer/>
