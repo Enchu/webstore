@@ -31,14 +31,14 @@
 
 ### Локальный запуск
 
-### `frontend`
+### frontend
 
-**npm i**
+**`npm i`**
 
-**npm start**
+**`npm start`**
 
 **server [http://localhost:3000](http://localhost:3000)**
 
-### `backend`
+### backend
 
-**dotnet run**
+**`dotnet run`**
