@@ -42,7 +42,6 @@ function App() {
                 </Routes>
 
                 <Footer/>
-                {/*<ExampleForm/>*/}
             </div>
         </BrowserRouter>
     );

@@ -19,27 +19,6 @@
             font-weight: 700;
             margin-right: auto;
         }
-
-        .nav-search{
-            margin-right: auto;
-            display: flex;
-            align-items: center;
-            text-align: center;
-
-            padding: 0.5rem 1rem;
-
-            border: 1px solid rgba(155,154,151, 0.4);
-            border-radius: 30px;
-
-            .nav-search-input{
-                margin-left: 0.5rem;
-                background-color: transparent;
-                color: var(--white);
-                outline: none;
-                border: none;
-            }
-        }
-
         .nav-list {
             margin: 0;
             display: flex;

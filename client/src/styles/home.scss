@@ -3,7 +3,8 @@
 }
 
 .sidebar {
-  width: 200px;
+  overflow: auto;
+  max-height: 100%;
 }
 
 main {

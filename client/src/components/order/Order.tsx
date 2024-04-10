@@ -10,9 +10,21 @@ const Order:FC<any> = observer(({item}) => {
     return (
         <div className='item'>
             <img src={item.img}  alt={''}/>
-            <h2>{item.title}</h2>
-            <p>{item.price}$</p>
-            <FaTrash className='delete-icon' onClick={() => cart.deleteOrder(item.id)}/>
+            <div>
+                <h2>{item.title}</h2>
+                <p>{item.price}$</p>
+            </div>
+            <div className='order__item' onClick={() => cart.deleteOrder(item.id)}>
+                <div className='order__item-container'>
+                    <div className='order__item-text'>
+                        Удалить
+                    </div>
+                    <div className='order__item-icon'>
+                        <FaTrash className='delete-icon'/>
+                    </div>
+                </div>
+            </div>
+
         </div>
     );
 });

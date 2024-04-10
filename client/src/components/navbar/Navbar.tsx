@@ -1,15 +1,13 @@
 import React, {FC, useContext, useEffect, useRef, useState} from 'react';
-import './style.scss'
+import './navbar.scss'
 import {NavLink} from "react-router-dom";
 import BtnDarkMode from "../btnDarkMode/BtnDarkMode";
 import {FaBasketShopping} from "react-icons/fa6";
 import ModalAuth from "../modalAuth/ModalAuth";
 import {Context} from "../../index";
-import Order from "../order/Order";
-import internal from "stream";
 import {observer} from "mobx-react-lite";
 import ShowOrders from "../order/ShowOrders";
-import {FaUserCircle} from "react-icons/fa";
+import {FaSearch, FaUserCircle} from "react-icons/fa";
 import UserMenu from "../userMenu/UserMenu";
 
 const showNothing = () => {
@@ -25,7 +23,6 @@ const Navbar: FC = observer(() => {
     const [cartOpen, setCartOpen] = useState(false);
     const [authOpen, setAuthOpen] = useState(false);
     const [userOpen, setUserOpen] = useState(false);
-    const [searchTerm, setSearchTerm] = useState('');
 
     const activeLink = 'nav-list__link nav-list__link--active'
     const normalLink = 'nav-list__link'
@@ -38,12 +35,6 @@ const Navbar: FC = observer(() => {
         setCartOpen(false);
     };
 
-    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const term = e.target.value;
-        setSearchTerm(term);
-        cart.filterItemsBySearch(term);
-    };
-
     return (
         <header className="nav">
             <div className="container">
@@ -52,18 +43,7 @@ const Navbar: FC = observer(() => {
                         <strong>Enchu</strong>
                     </NavLink>
 
-                    <div className="nav-search">
-                        <input
-                            value={searchTerm}
-                            autoComplete="off"
-                            placeholder="Поиск"
-                            onChange={handleSearch}
-                            type="text"
-                            className="nav-search-input"
-                        />
-                    </div>
-
-                    <BtnDarkMode />
+                    <BtnDarkMode/>
 
                     <ul className="nav-list">
                         <li className="nav-list__item">

@@ -11,13 +11,19 @@ const Items: FC<any> = observer(({items}) => {
 
     return (
         <div className='item'>
-            <div className='item-img'>
-                <img src={img} alt={""} onClick={() => history('/item/' + id)}/>
+            <div className='item__info'>
+                <div className='item-img'>
+                    <img src={img} alt={""} onClick={() => history('/item/' + id)}/>
+                </div>
+                <h2>{title}</h2>
+                <p>{desc}</p>
+                <div className='item__cost'>
+                    <b>{price}</b>
+                </div>
+                <div className='add-to-cart' onClick={() => cart.addToOrder(items)}>
+                    <button>Купить</button>
+                </div>
             </div>
-            <h2>{title}</h2>
-            <p>{desc}</p>
-            <b>{price}$</b>
-            <div className='add-to-cart' onClick={() => cart.addToOrder(items)}>+</div>
         </div>
     );
 });

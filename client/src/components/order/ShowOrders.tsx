@@ -10,12 +10,12 @@ const ShowOrders: FC<any> = observer(({props}) => {
     props.orders.forEach((el: IItems) => summa += Number.parseFloat(el.price))
 
     return (
-        <div className='order-container'>
+        <div className='order__container'>
             {props.orders.map((el: IItems) => (
                 <Order key={el.id} item={el}/>
             ))}
             <p className='summa'>Сумма: {new Intl.NumberFormat().format(summa)}$</p>
-            <div className='order-container__check'>
+            <div className='order__container-check'>
                 <NavLink to="/checkouts">
                     <button>Check out</button>
                 </NavLink>

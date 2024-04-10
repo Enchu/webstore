@@ -1,16 +1,16 @@
 .main-items{
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 300px);
+  grid-gap: 20px;
+  justify-content: center;
+  margin: 10px 2px;
 
   .item{
-    max-width: 400px;
-    width: 30%;
-    margin-bottom: 50px;
+    display: inline-block;
+    border-radius: 8px;
     overflow: hidden;
-
-    position: relative;
-    padding-bottom: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 8px 16px rgba(0,0,0, 0.4);
 
     h2{
       font-weight: 600;
@@ -23,12 +23,32 @@
       margin: 10px 20px 20px 20px;
     }
 
-    img, b{
+    img{
       margin: 10px 20px;
     }
 
-    b{
-      color: #5fa36a
+    .item__cost{
+      text-align: left;
+      margin: 10px 20px;
+    }
+
+    .item__cost b{
+      font-size: 24px;
+      font-weight: 700;
+      position: relative;
+      padding-right: 20px;
+    }
+
+    .item__cost b::after{
+      content: '₽';
+
+      display: block;
+      position: absolute;
+      bottom: 0;
+      right: 3px;
+
+      font-weight: 300;
+      font-size: 0.8em;
     }
 
     .item-img{
@@ -36,41 +56,36 @@
       justify-content: center;
 
       img{
-        width: 250px;
-        height: auto;
-        border-radius: 10px 10px 0 0;
-        transition: transform 0.5s ease;
-
-        &:hover {
-          transform: scale(1.05);
-        }
+        width: 300px;
+        height: 300px;
+        border: 1px solid black;
       }
     }
   }
 
   .add-to-cart{
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
+    button{
+      width: 100%;
+      min-width: auto;
 
-    color: #fff;
-    background: #ca5252;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
 
-    width: 35px;
-    height: 35px;
+      border: 2px solid #000;
+      background-color: var(--page-bg);
+      padding: 10px;
 
-    text-align: center;
-    line-height: 35px;
+      font-size: 1em;
+      font-weight: 600;
 
-    border-radius: 50%;
-    cursor: pointer;
-    font-weight: 600;
-    transition: transform 500ms ease;
+      transition: transform 500ms ease;
+      transform: scale(1.05);
 
-    transform: scale(1.05);
-
-    &:hover{
-      transform: scale(1.5) translateY(-5px);
+      &:hover{
+        background-color: var(--page-bg);
+        transform: scale(0.9) translateY(-5px);
+      }
     }
   }
 }

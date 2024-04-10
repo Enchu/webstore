@@ -6,6 +6,7 @@ import SlideBar from "../components/slidebar/SlideBar";
 import '../styles/home.scss'
 import {IItems} from "../Interface/Items";
 import {ICategory} from "../Interface/Category";
+import Search from "../components/search/Search";
 
 
 const Home : FC = observer(() => {
@@ -17,9 +18,9 @@ const Home : FC = observer(() => {
 
     return (
         <div className="main-container">
-            {/*<nav className="sidebar">*/}
-            {/*    <SlideBar />*/}
-            {/*</nav>*/}
+            <nav className="sidebar">
+                <SlideBar />
+            </nav>
             <main>
 
                 <div className="main-category">
@@ -29,6 +30,9 @@ const Home : FC = observer(() => {
                         </div>
                     ))}
                 </div>
+
+
+                <Search/>
 
                 <div className='main-items'>
                     {products}

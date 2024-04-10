@@ -1,6 +1,6 @@
 import React, {FC, useContext} from 'react';
 import {Context} from "../../index";
-import './style.scss'
+import './SlideBar.scss'
 
 const SlideBar: FC = () => {
     const {cart} = useContext(Context)

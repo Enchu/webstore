@@ -1,4 +1,4 @@
-.order-container{
+.order__container{
   margin: 10px;
 
   .summa{
@@ -11,6 +11,8 @@
   }
 
   .item{
+    display: flex;
+
     width: 100%;
     float: left;
     margin-bottom: 20px;
@@ -29,24 +31,46 @@
     p{
       font-weight: 600;
     }
-
-    .delete-icon{
-      color: #ca5252;
-      float: right;
-      position: relative;
-      top: -25px;
-      cursor: pointer;
-      transition: color, transform 500ms ease;
-
-      &:hover{
-        color: #d83030;
-        transform: scale(1.5);
-      }
-    }
   }
 }
 
-.order-container__check{
+  .order__item{
+    display: flex;
+    flex: 1;
+    position: relative;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+
+    cursor: pointer;
+    transition: color, transform 500ms ease;
+
+    .order__item-container{
+      display: inline-flex;
+      align-items: baseline;
+      box-sizing: border-box;
+    }
+
+    .order__item-text{
+      padding: 0 10px 0 0;
+    }
+
+    &:hover{
+      color: #d83030;
+    }
+  }
+
+  .delete-icon{
+    color: #ca5252;
+    float: right;
+
+    &:hover{
+      color: #d83030;
+      transform: scale(1.5);
+    }
+  }
+
+.order__container-check{
   margin-bottom: 12px;
 
   button{
@@ -68,7 +92,7 @@
     color: #fff;
 
     &:hover {
-      background-color:  #444445; /* ваш цвет при наведении */
+      background-color:  #444445;
     }
   }
 }
