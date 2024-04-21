@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import './style.css'
 import {NavLink} from "react-router-dom";
-import Image from "../image/ImageProps";
+import Image from "../UI/image/ImageProps";
 
 import vk from "../../image/icons/vk.svg"
 import github from "../../image/icons/gitHub.svg"

@@ -1,11 +1,11 @@
 import React, {FC, useEffect} from 'react';
-import detectDarkMode from "../../utils/detectDarkMode";
-import {useLocalStorage} from "../../utils/useLocalStorage";
+import detectDarkMode from "../../../utils/detectDarkMode";
+import {useLocalStorage} from "../../../hooks/useLocalStorage";
 import './style.scss';
 import Image from "../image/ImageProps";
 
-import sun from "../../image/icons/sun.svg"
-import moon from "../../image/icons/moon.svg"
+import sun from "../../../image/icons/sun.svg"
+import moon from "../../../image/icons/moon.svg"
 
 const BtnDarkMode: FC = () => {
     const [darkMode, setDarkMode] = useLocalStorage('darkMode', detectDarkMode());

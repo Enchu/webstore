@@ -1,7 +1,7 @@
 import React, {FC, useContext, useEffect, useRef, useState} from 'react';
 import './navbar.scss'
 import {NavLink} from "react-router-dom";
-import BtnDarkMode from "../btnDarkMode/BtnDarkMode";
+import BtnDarkMode from "../UI/btnDarkMode/BtnDarkMode";
 import {FaBasketShopping} from "react-icons/fa6";
 import ModalAuth from "../modalAuth/ModalAuth";
 import {Context} from "../../index";

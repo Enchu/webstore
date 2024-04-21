@@ -1,6 +1,6 @@
 import React from 'react';
 
-import any from '../../image/any.png'
+import any from '../../../image/any.png'
 
 interface ImageProps {
     img: any;

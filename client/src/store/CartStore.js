@@ -63,6 +63,56 @@ export default class CartStore {
                 price: 149.99,
                 totalprice: 149.99
             },
+            {
+                id: 7,
+                title: 'Стол',
+                img: any,
+                desc: 'Lorem ipsum dolor sit amet, consectetur aipisicing.',
+                category: 'tables',
+                count: 1,
+                price: 149.99,
+                totalprice: 149.99
+            },
+            {
+                id: 8,
+                title: 'Стол',
+                img: any,
+                desc: 'Lorem ipsum dolor sit amet, consectetur aipisicing.',
+                category: 'tables',
+                count: 1,
+                price: 149.99,
+                totalprice: 149.99
+            },
+            {
+                id: 9,
+                title: 'Стол',
+                img: any,
+                desc: 'Lorem ipsum dolor sit amet, consectetur aipisicing.',
+                category: 'tables',
+                count: 1,
+                price: 149.99,
+                totalprice: 149.99
+            },
+            {
+                id: 10,
+                title: 'Стол',
+                img: any,
+                desc: 'Lorem ipsum dolor sit amet, consectetur aipisicing.',
+                category: 'tables',
+                count: 1,
+                price: 149.99,
+                totalprice: 149.99
+            },
+            {
+                id: 11,
+                title: 'Стол',
+                img: any,
+                desc: 'Lorem ipsum dolor sit amet, consectetur aipisicing.',
+                category: 'tables',
+                count: 1,
+                price: 149.99,
+                totalprice: 149.99
+            },
             ]
         this._orders = []
         this._category = [

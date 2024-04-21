@@ -1,6 +1,6 @@
 import React, {FC, useContext, useState} from 'react';
 import {FaSearch} from "react-icons/fa";
-import {Context} from "../../index";
+import {Context} from "../../../index";
 import './search.scss'
 
 const Search = () => {
