@@ -43,21 +43,28 @@ const Home : FC = observer(() => {
 
     return (
         <div className="main-container">
-            <nav className="sidebar">
+            {/*<nav className="sidebar">
                 <SlideBar/>
-            </nav>
+            </nav>*/}
             <main>
+                <div className="container">
+                    <div className="main-category">
+                        <ul>
+                            {cart.categories.map((category: ICategory) => (
+                                <li
+                                    key={category.id}
+                                    onClick={() => cart.chooseCategory(category)}
+                                    className='category__item'
+                                >
+                                    {category.name}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
 
-                <div className="main-category">
-                    {cart.categories.map((category: ICategory) => (
-                        <div key={category.id} onClick={() => cart.chooseCategory(category)}>
-                            {category.name}
-                        </div>
-                    ))}
+                    <Search/>
+
                 </div>
-
-
-                <Search/>
 
                 <div className='main-items'>
                     {products}
