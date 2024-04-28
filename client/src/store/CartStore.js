@@ -1,5 +1,6 @@
 import {makeAutoObservable} from "mobx";
 import any from "../image/any.png";
+import transliterateToRussianWithKeyCode from "../utils/transliterate";
 export default class CartStore {
     constructor() {
         this._cart = [
@@ -119,19 +120,63 @@ export default class CartStore {
             {
                 id:'all',
                 name: 'все',
+                isActive: true,
             },
             {
                 id:'chairs',
                 name: 'стулья',
+                isActive: false,
             },
             {
                 id:'tables',
                 name: 'столы',
+                isActive: false,
             },
             {
                 id:'sofa',
-                name: 'диваны'
-            }
+                name: 'диваны',
+                isActive: false,
+            },
+            {
+                id:'bed',
+                name: 'кровати',
+                isActive: false,
+            },
+            {
+                id:'desk',
+                name: 'парты',
+                isActive: false,
+            },
+            {
+                id:'wardrobe',
+                name: 'шкафы',
+                isActive: false,
+            },
+            {
+                id:'bookcase',
+                name: 'книжные шкафы',
+                isActive: false,
+            },
+            {
+                id:'shelving units',
+                name: 'стелажи',
+                isActive: false,
+            },
+            {
+                id:'bag',
+                name: 'сумки',
+                isActive: false,
+            },
+            {
+                id:'lighting',
+                name: 'свет',
+                isActive: false,
+            },
+            {
+                id:'storage',
+                name: 'хранилище',
+                isActive: false,
+            },
         ]
         this._currentCart = this._cart
         makeAutoObservable(this)
@@ -202,6 +247,13 @@ export default class CartStore {
     }
 
     chooseCategory(category){
+        this._category.forEach(item => item.isActive = false);
+
+        const selectedCategory = this._category.find(item => item.id === category.id);
+        if (selectedCategory) {
+            selectedCategory.isActive = true;
+        }
+
         if(category.id === 'all'){
             this._currentCart = this._cart;
         } else{
@@ -213,6 +265,7 @@ export default class CartStore {
         if (!searchTerm.trim()) {
             this.setCurrentCart(this.carts);
         } else {
+            let russianSearchTerm = transliterateToRussianWithKeyCode(searchTerm.toLowerCase());
             const filteredItems = this.carts.filter((item) =>
                 item.title.toLowerCase().includes(searchTerm.toLowerCase())
             );

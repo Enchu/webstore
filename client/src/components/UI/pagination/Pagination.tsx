@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import './pagination.style.scss'
+import './pagination.module.scss'
 import {getPageCount, getPagesArray} from "../../../utils/pages";
 import {PaginationProps} from "../../../Interface/PaginationProps";
 

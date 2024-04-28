@@ -6,6 +6,7 @@ import './search.scss'
 const Search = () => {
     const { cart } = useContext(Context);
     const [searchTerm, setSearchTerm] = useState('');
+
     const handleSearch = (e) => {
         const term = e.target.value;
         setSearchTerm(term);
